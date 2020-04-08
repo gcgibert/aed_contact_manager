@@ -1,5 +1,6 @@
 from controllers import ContactManager
 from tkinter import *
+from tkinter import messagebox
 from tkinter.scrolledtext import ScrolledText
 
 class ContactManagerGUI:
@@ -93,9 +94,13 @@ class ContactManagerGUI:
         name = self.add_contact_name.get()
         email_address = self.add_contact_email_address.get()
         phone_number = self.add_contact_phone_number.get()
-        self.cm.create_contact(name, email_address, phone_number)
-        self.populate_list()
-        parent.destroy()
+
+        if not self.cm.is_valid_email_address(email_address):
+            messagebox.showwarning("Invalid", "Invalid email!")
+        else:
+            self.cm.create_contact(name, email_address, phone_number)
+            self.populate_list()
+            parent.destroy()
 
 
     def btn_remove_contact_remove_action(self):
