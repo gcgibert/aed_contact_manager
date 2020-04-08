@@ -97,6 +97,7 @@ class ContactManagerGUI:
 
         if not self.cm.is_valid_email_address(email_address):
             messagebox.showwarning("Invalid", "Invalid email!")
+            parent.deiconify()
         else:
             self.cm.create_contact(name, email_address, phone_number)
             self.populate_list()
